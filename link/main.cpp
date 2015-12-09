@@ -15,22 +15,30 @@ struct student
 };
 int main(int argc, const char * argv[]) {
     // insert code here...
-    
-    student A,B,C,D;
-    student *p,*head;
-    scanf("%s%d",A.name,&A.year);
-    scanf("%s%d",B.name,&B.year);
-    scanf("%s%d",C.name,&C.year);
-    scanf("%s%d",D.name,&D.year);
-    A.next = &B;
-    B.next = &C;
-    C.next = &D;
-    D.next = 0;
-    head = &A;
+    int i;
+    student *p,*head,*q;
+    head = new student;
+    head->next = 0;
     p = head;
+    for(i=0;i<4;i++)
+    {
+        q = new student;
+        q->next = 0;
+        p->next = q;
+        scanf("%s %d",q->name,&(q->year));
+        p = q;
+    }
+    p = head->next;
     while (p!=0) {
         printf("%s %d\n",p->name,p->year);
         p = p->next;
+    }
+    p = head->next;
+    while (p!=0) {
+        q = p;
+        p = p->next;
+        free(q);
+        
     }
     return 0;
 }
